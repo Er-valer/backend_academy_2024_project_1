@@ -10,11 +10,15 @@ public enum Complexity {
     MEDIUM,
     HIGH;
 
+    public static final int LOW_ATTEMPTS = 3;
+    public static final int MEDIUM_ATTEMPTS = 4;
+    public static final int HIGH_ATTEMPTS = 6;
+
     public static int maxAttempts(Complexity complexity) {
         return switch (complexity) {
-            case LOW -> 3;
-            case MEDIUM -> 4;
-            case HIGH -> 6;
+            case LOW -> LOW_ATTEMPTS;
+            case MEDIUM -> MEDIUM_ATTEMPTS;
+            case HIGH -> HIGH_ATTEMPTS;
         };
     }
 

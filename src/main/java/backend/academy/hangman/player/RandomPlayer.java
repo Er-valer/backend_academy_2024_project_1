@@ -4,9 +4,11 @@ import backend.academy.hangman.dictionary.Category;
 import backend.academy.hangman.dictionary.Complexity;
 import backend.academy.hangman.game.Move;
 import java.io.PrintStream;
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class RandomPlayer implements Player {
+    private static final char MAX_CHAR = 'z';
+    private final SecureRandom random = new SecureRandom();
     private final PrintStream out;
 
     public RandomPlayer(final PrintStream out) {
@@ -22,7 +24,7 @@ public class RandomPlayer implements Player {
      */
     @Override
     public Move getMove() {
-        return new Move(String.valueOf((char)('a' + new Random().nextInt(26))));
+        return new Move(String.valueOf((char) ('a' + random.nextInt(MAX_CHAR - 'a'))));
     }
 
     /**

@@ -27,6 +27,8 @@ public class Visualizer {
         "gggggggggggggggg"
     };
 
+    private Visualizer() {}
+
     public static String generateHangman(int attempts) {
         StringBuilder hangman = new StringBuilder();
 

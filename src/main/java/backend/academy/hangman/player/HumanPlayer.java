@@ -4,6 +4,7 @@ import backend.academy.hangman.dictionary.Category;
 import backend.academy.hangman.dictionary.Complexity;
 import backend.academy.hangman.game.Move;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -18,7 +19,7 @@ public class HumanPlayer implements Player {
     }
 
     public HumanPlayer(final PrintStream out) {
-        this(out, new Scanner(System.in));
+        this(out, new Scanner(System.in, StandardCharsets.UTF_8));
     }
 
     public HumanPlayer(final Scanner in) {
@@ -26,7 +27,7 @@ public class HumanPlayer implements Player {
     }
 
     public HumanPlayer() {
-        this(System.out, new Scanner(System.in));
+        this(System.out, new Scanner(System.in, StandardCharsets.UTF_8));
     }
 
     /**
@@ -70,18 +71,20 @@ public class HumanPlayer implements Player {
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean continuePlaying() {
-        log("Do you want to play again? (y/n)");
+        String question = "Do you want to play again? (y/n)";
+        log(question);
 
         while (true) {
             String input = in.next().trim();
-            if (input.equalsIgnoreCase("y")) {
+            if ("y".equalsIgnoreCase(input)) {
                 return true;
-            } else if (input.equalsIgnoreCase("n")) {
+            } else if ("n".equalsIgnoreCase(input)) {
                 log("Goodbye!");
                 return false;
             }
-            log("Do you want to play again? (y/n)");
+            log(question);
         }
     }
 

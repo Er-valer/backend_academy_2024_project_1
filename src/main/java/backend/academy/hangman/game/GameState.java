@@ -2,14 +2,14 @@ package backend.academy.hangman.game;
 
 import backend.academy.hangman.dictionary.Complexity;
 import backend.academy.hangman.dictionary.Word;
-import lombok.Getter;
-import lombok.experimental.Accessors;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.IntStream;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
 @Accessors(fluent = false)
 @Getter
@@ -84,11 +84,17 @@ public class GameState {
     }
 
     @Override public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof GameState gameState)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof GameState gameState)) {
+            return false;
+        }
 
-        return attempts == gameState.attempts && guessed == gameState.guessed &&
-            Objects.equals(hiddenWord, gameState.hiddenWord) &&
-            Objects.deepEquals(guessedChars, gameState.guessedChars) && Objects.equals(used, gameState.used);
+        return attempts == gameState.attempts
+            && guessed == gameState.guessed
+            && Objects.equals(hiddenWord, gameState.hiddenWord)
+            && Objects.deepEquals(guessedChars, gameState.guessedChars)
+            && Objects.equals(used, gameState.used);
     }
 }

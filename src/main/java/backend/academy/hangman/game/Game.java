@@ -64,6 +64,7 @@ public class Game {
                 player.log("You lost. The word was: " + state.getHiddenWord());
             }
             case QUIT -> player.log("Goodbye!");
+            default -> throw new IllegalStateException("Unexpected value: " + result);
         }
         return result;
     }
@@ -96,9 +97,9 @@ public class Game {
         }
 
         while (true) {
-            if (playerMove.move().equals(HINT)) {
+            if (HINT.equals(playerMove.move())) {
                 player.log("HINT: " + state.getHiddenWord().hint());
-            } else if (playerMove.move().equals(QUIT)) {
+            } else if (QUIT.equals(playerMove.move())) {
                 return Result.QUIT;
             } else if (state.isUsed(playerMove)) {
                 player.log("This letter has already been used");
