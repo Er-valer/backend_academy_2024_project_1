@@ -26,41 +26,57 @@ public class GameTest {
     @ParameterizedTest
     @ValueSource(strings = {"aa", "!", "_", "Ы"})
     public void invalidInputTest(String invalidInput) {
+        // Given
         Game game = getSampleGameWithMoves(System.out, invalidInput);
         game.initState();
         GameState before = new GameState(game.getState());
+
+        // When
         game.move();
-        assertEquals(before, game.getState(), "State should not change after an incorrect move");
+        GameState after = game.getState();
+
+        // Then
+        assertEquals(before, after, "State should not change after an incorrect move");
     }
 
     @Test
     public void validCorrectInputTest() {
+        // Given
         String[] moves = new String[] {"o", "R", "a", "N", "g", "E"};
         Game game = getSampleGameWithMoves(System.out, moves);
         game.initState();
         for (var _ : moves) {
             GameState before = new GameState(game.getState());
-            game.move();
 
-            assertEquals(before.getGuessed() + 1, game.getState().getGuessed(),
+            // When
+            game.move();
+            GameState after = game.getState();
+
+            // Then
+            assertEquals(before.getGuessed() + 1, after.getGuessed(),
                 "The number of letters guessed should increase after entering the correct letter");
-            assertEquals(before.getAttempts(), game.getState().getAttempts(),
+            assertEquals(before.getAttempts(), after.getAttempts(),
                 "The number of attempts should not change after entering the correct letter");
         }
     }
 
     @Test
     public void validIncorrectInputTest() {
+        // Given
         String[] moves = new String[] {"B", "c", "D", "f", "H", "z"};
         Game game = getSampleGameWithMoves(System.out, moves);
         game.initState();
         for (var _ : moves) {
             GameState before = new GameState(game.getState());
-            game.move();
 
-            assertEquals(before.getGuessed(), game.getState().getGuessed(),
+            // When
+            game.move();
+            GameState after = game.getState();
+
+            // Then
+            assertEquals(before.getGuessed(), after.getGuessed(),
                 "The number of letters guessed should not change after entering the incorrect letter");
-            assertEquals(before.getAttempts() - 1, game.getState().getAttempts(),
+            assertEquals(before.getAttempts() - 1, after.getAttempts(),
                 "The number of attempts should decrease after entering the incorrect letter.");
         }
     }
@@ -68,8 +84,14 @@ public class GameTest {
     @ParameterizedTest
     @ArgumentsSource(resultTestArgumentsProvider.class)
     public void resultTest(String[] moves, Result expectedResult) {
+        // Given
         Game game = getSampleGameWithMoves(System.out, moves);
-        assertEquals(expectedResult, game.play(),
+
+        // When
+        Result result = game.play();
+
+        // Then
+        assertEquals(expectedResult, result,
             "For moves: " + Arrays.toString(moves) + " expected result: " + expectedResult);
     }
 

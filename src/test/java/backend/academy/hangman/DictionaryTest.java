@@ -52,7 +52,10 @@ public class DictionaryTest {
     @ParameterizedTest
     @ArgumentsSource(WordsInfoProvider.class)
     public void getRandomWordTest(Category category, Complexity complexity, Set<String> possibleWords) {
+        // When
         Word randomWord = defaultDictionary.getRandomWord(category, complexity);
+
+        // Then
         assertThat(possibleWords).contains(randomWord.word());
         assertEquals(category, randomWord.category());
         assertEquals(complexity, randomWord.complexity());
