@@ -1,6 +1,5 @@
 package backend.academy.hangman.game;
 
-import backend.academy.hangman.dictionary.Complexity;
 import backend.academy.hangman.dictionary.Word;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,7 +21,7 @@ public class GameState {
 
     public GameState(Word hiddenWord) {
         this.hiddenWord = hiddenWord;
-        attempts = Complexity.maxAttempts(hiddenWord.complexity());
+        attempts = hiddenWord.complexity().getMaxAttempts();
 
         guessedChars = new Character[hiddenWord.word().length()];
         Arrays.fill(guessedChars, '_');
