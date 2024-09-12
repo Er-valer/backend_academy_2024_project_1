@@ -15,11 +15,12 @@ import lombok.experimental.Accessors;
 public class GameState {
     private final Word hiddenWord;
     private final Character[] guessedChars;
-    private final Set<Character> used = new HashSet<>();
+    private final Set<Character> used;
     private int attempts;
     private int guessed;
 
     public GameState(Word hiddenWord) {
+        this.used = new HashSet<>();
         this.hiddenWord = hiddenWord;
         attempts = hiddenWord.complexity().getMaxAttempts();
 
@@ -30,7 +31,7 @@ public class GameState {
     public GameState(GameState state) {
         this.hiddenWord = state.hiddenWord;
         this.guessedChars = state.guessedChars;
-        this.used.addAll(state.used);
+        this.used = new HashSet<>(state.used);
         this.attempts = state.attempts;
         this.guessed = state.guessed;
     }

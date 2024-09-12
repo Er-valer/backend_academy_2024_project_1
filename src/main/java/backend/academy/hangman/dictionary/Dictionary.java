@@ -12,12 +12,11 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public final class Dictionary {
-    private final SecureRandom random = new SecureRandom();
-
+    private final SecureRandom random;
     private final List<Word> words;
-    private final Set<Complexity> availableComplexities = EnumSet.noneOf(Complexity.class);
-    private final Set<Category> availableCategories = EnumSet.noneOf(Category.class);
-    private final Map<Category, Set<Complexity>> availableComplexitiesByCategory = new EnumMap<>(Category.class);
+    private final Set<Complexity> availableComplexities;
+    private final Set<Category> availableCategories;
+    private final Map<Category, Set<Complexity>> availableComplexitiesByCategory;
 
     /**
      * Creates dictionary.
@@ -26,6 +25,10 @@ public final class Dictionary {
      * @throws InvalidWordException if even one word is invalid ({@link Word#isValid()})
      */
     public Dictionary(final Word... words) {
+        this.random = new SecureRandom();
+        this.availableComplexities = EnumSet.noneOf(Complexity.class);
+        this.availableCategories = EnumSet.noneOf(Category.class);
+        this.availableComplexitiesByCategory = new EnumMap<>(Category.class);
         this.words = new ArrayList<>(words.length);
 
         for (Word word : words) {
